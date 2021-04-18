@@ -1,0 +1,180 @@
+{
+  "student": [
+    {
+      "name": "ilham",
+      "difficulty": "easy",
+      "score": 8
+    },
+    {
+      "name": "hello",
+      "difficulty": "easy",
+      "score": 10
+    },
+    {
+      "name": "hello",
+      "difficulty": "standard",
+      "score": 5
+    },
+
+    {
+      "name": "yolo",
+      "difficulty": "easy",
+      "score": 1
+    },
+    {
+      "name": "ilham",
+      "difficulty": "easy",
+      "score": 6
+    },
+    {
+      "name": "yolo",
+      "difficulty": "easy",
+      "score": 8
+    },
+    {
+      "name": "yolo6",
+      "difficulty": "easy",
+      "score": 6
+    },
+    {
+      "name": "yolo7",
+      "difficulty": "easy",
+      "score": 2
+    },
+    {
+      "name": "hell",
+      "difficulty": "standard",
+      "score": 3
+    },
+    {
+      "name": "hate",
+      "difficulty": "hard",
+      "score": 2
+    },
+    {
+      "name": "flash",
+      "difficulty": "standard",
+      "score": 6
+    },
+    {
+      "name": "lol1",
+      "difficulty": "easy",
+      "score": 3
+    },
+    {
+      "name": "hello12",
+      "difficulty": "easy",
+      "score": 4
+    },
+    {
+      "name": "hello",
+      "difficulty": "easy",
+      "score": 6
+    },
+    {
+      "name": "yolo78",
+      "difficulty": "easy",
+      "score": 7
+    },
+    {
+      "name": "ilham",
+      "difficulty": "hard",
+      "score": 5
+    },
+    {
+      "name": "hello1",
+      "difficulty": "easy",
+      "score": 8
+    },
+    {
+      "name": "yolo8",
+      "difficulty": "easy",
+      "score": 10
+    },
+    {
+      "name": "yolo8",
+      "difficulty": "easy",
+      "score": 8
+    },
+    {
+      "name": "heell",
+      "difficulty": "easy",
+      "score": 10
+    },
+    {
+      "name": "yolo9",
+      "difficulty": "standard",
+      "score": 8
+    },
+    {
+      "name": "lol9",
+      "difficulty": "standard",
+      "score": 10
+    },
+    {
+      "name": "hell9",
+      "difficulty": "standard",
+      "score": 10
+    },
+    {
+      "name": "hrlll6",
+      "difficulty": "standard",
+      "score": 8
+    },
+    {
+      "name": "lollll",
+      "difficulty": "standard",
+      "score": 10
+    },
+    {
+      "name": "loolll7",
+      "difficulty": "standard",
+      "score": 8
+    },
+    {
+      "name": "loooo0",
+      "difficulty": "easy",
+      "score": 8
+    },
+    {
+      "name": "hello0",
+      "difficulty": "easy",
+      "score": 6
+    },
+    {
+      "name": "lolfinally",
+      "difficulty": "easy",
+      "score": 9
+    },
+    {
+      "name": "ilhamH",
+      "difficulty": "easy",
+      "score": 5
+    },
+    {
+      "name": "hello",
+      "difficulty": "easy",
+      "score": 4
+    },
+    {
+      "name": "hello",
+      "difficulty": "standard",
+      "score": 0
+    },
+    {
+      "name": "hello",
+      "difficulty": "standard",
+      "score": 0
+    },
+    {
+      "name": "hello",
+      "difficulty": "standard",
+      "score": 0
+    },
+    {
+      "name": "hello1",
+      "difficulty": "hard",
+      "score": 0
+    }
+  ]
+}
