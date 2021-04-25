@@ -15,7 +15,6 @@
       "difficulty": "standard",
       "score": 5
     },
-
     {
       "name": "yolo",
       "difficulty": "easy",
@@ -175,6 +174,66 @@
       "name": "hello1",
       "difficulty": "hard",
       "score": 0
+    },
+    {
+      "name": "hello",
+      "difficulty": "easy",
+      "score": 1
+    },
+    {
+      "name": "ygytg7gt",
+      "difficulty": "standard",
+      "score": 1
+    },
+    {
+      "name": "name",
+      "difficulty": "standard",
+      "score": 3
+    },
+    {
+      "difficulty": "hard",
+      "name": "yolo",
+      "score": 0
+    },
+    {
+      "name": "hello",
+      "difficulty": "standard",
+      "score": 4
+    },
+    {
+      "name": "hello world",
+      "difficulty": "hard",
+      "score": 2
+    },
+    {
+      "name": "h",
+      "difficulty": "standard",
+      "score": 0
+    },
+    {
+      "name": "hell",
+      "difficulty": "standard",
+      "score": 0
+    },
+    {
+      "name": "hellolol",
+      "difficulty": "easy",
+      "score": 8
+    },
+    {
+      "name": "hello12",
+      "difficulty": "easy",
+      "score": 8
+    },
+    {
+      "name": "hell",
+      "difficulty": "standard",
+      "score": 3
+    },
+    {
+      "name": "hello21",
+      "difficulty": "hard",
+      "score": 2
     }
   ]
 }

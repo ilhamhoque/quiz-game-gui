@@ -1,29 +1,29 @@
 {
   "easy": [
     {
-      "range": "1,10",
+      "ques_mul": 2,
+      "attempt": 3,
       "ques_add": 5,
       "ques_sub": 3,
-      "ques_mul": 2,
-      "attempt": "3"
+      "range": "1,10"
     }
   ],
   "standard": [
     {
-      "range": "2,15",
+      "ques_mul": 2,
+      "attempt": 2,
       "ques_add": 5,
       "ques_sub": 3,
-      "ques_mul": 2,
-      "attempt": 2
+      "range": "2,15"
     }
   ],
   "hard": [
     {
-      "range": "3,20",
-      "ques_add": "3",
-      "ques_sub": "3",
-      "ques_mul": "4",
-      "attempt": 2
+      "ques_mul": 4,
+      "attempt": 2,
+      "ques_add": 3,
+      "ques_sub": 3,
+      "range": "3,20"
     }
   ]
 }
