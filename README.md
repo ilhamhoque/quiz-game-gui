@@ -9,7 +9,7 @@
 ## SPECIFICATION:
 
 
-### MAIN: 
+### [MAIN](https://github.com/ilhamhoque/quiz-game-gui/blob/main/main.py): 
 
 1. the pupils must have the ability to enter their name before they start their Maths Quiz
 2. the pupil must be able to choose the difficulty level of the quiz as "EASY", "STANDARD" or "HARD"
@@ -22,7 +22,7 @@
 9. the teacher would like to store the difficulty level and quiz results for each pupil, and have a way to view all of these results after the quizzes have been completed
 10. menus choices should be used to help navigate the program.
 
-### Admin/Teacher's only:
+### [Admin/Teacher's only](https://github.com/ilhamhoque/quiz-game-gui/blob/main/admin.py):
 
 1. The admin can change the rules without changing the rules from source code.
 2. The admin can View the Rules and Results of the users.
