@@ -1,7 +1,10 @@
 # Quiz Game GUI
 ## OVERVIEW:
 #### Maths Quiz game. It has 3 difficulties for the user to do the quiz. At the end of the quiz it will save the name, difficulty and score into an enternal .JSON file.
-#### Another program for the user to change the rules and view the rules and results. You can view all the rules for all 3 difficulty.
+#### Another program is for the user to:
+* view the rules
+* change the rules
+* view the results of the pupils
 
 ## SPECIFICATION:
 
