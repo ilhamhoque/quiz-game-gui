@@ -5,6 +5,9 @@ from tkinter import messagebox
 with open('rules.json', 'r') as file:
     data = json.load(file)
 
+with open("student.json", 'r') as student_file:
+    student_data = json.load(student_file)
+
 
 def destroyApp_Menu():  # destroys the app and return to 2nd menu
     app.destroy()
@@ -34,10 +37,29 @@ def result():  # view the result from Menu #
     user_value.config(width=42)
     user_value.place(relx=0.31, rely=0.5)
 
+    def find_keys(student, kv):
+        if isinstance(student, list):
+            for i in student:
+                for x in find_keys(i, kv):
+                    yield x
+        elif isinstance(student, dict):
+            if kv in student:
+                yield student[kv]
+            for j in student.values():
+                for x in find_keys(j, kv):
+                    yield x
+
+    list_value = list(find_keys(student_data, "name"))
+
     def check_name_present():  # checks if the user_value has strings
         if len(user_value.get()) == 0:
             error = Label(text="Name can't be empty", fg='black', bg='white')
             error.place(relx=0.37, rely=0.7)
+            
+        elif str(user_value.get()) not in list_value:
+            errorPlace = Label(text="Name not found", fg='black', bg='white')
+            errorPlace.place(relx=0.37, rely=0.75)
+
         else:  # it will create a new window with all the score result related to the name
             name = str(user_value.get())
             global app
@@ -54,14 +76,12 @@ def result():  # view the result from Menu #
             text = Text(text_display_canvas)
             text_display_canvas.create_window((40, 20), window=text, anchor='nw')
 
-            with open("student.json") as config_file:  # this code opens the student.json file
-                data_file = json.load(config_file)
+            for item in student_data["student"]:  # this for loop will go through all the names
+                if item["name"] == name:  # if the name is present in the student.json then it will select it
+                    for k in item:  # this will select all the items from the selected name
+                        text.insert("end", '{} = {}\n'.format(k, item[k]))  # this will present all the items
+                        # if the name doesn't exist then it will show blank screen.
 
-                for item in data_file["student"]:  # this for loop will go through all the names
-                    if item["name"] == name:  # if the name is present in the student.json then it will select it
-                        for k in item:  # this will select all the items from the selected name
-                            text.insert("end", '{} = {}\n'.format(k, item[k]))  # this will present all the items
-                            # if the name doesn't exist then it will show blank screen.
             result_display.destroy()  # it will destroy the user entry window
             app.mainloop()
 
@@ -205,9 +225,9 @@ def check_correct():  # displays messagebox when the rules(addition, subtraction
 
 
 def check():
-    a = int(data[rep][0]["ques_add"])   # extracts the number of addition
-    s = int(data[rep][0]["ques_sub"])   # extracts the number of subtraction
-    m = int(data[rep][0]["ques_mul"])   # extracts the number of multiplication
+    a = int(data[rep][0]["ques_add"])  # extracts the number of addition
+    s = int(data[rep][0]["ques_sub"])  # extracts the number of subtraction
+    m = int(data[rep][0]["ques_mul"])  # extracts the number of multiplication
 
     sum_rules = a + s + m
     if sum_rules != 10:  # if the number of addition, subtraction and multiplication doesn't add up to 10
@@ -227,22 +247,22 @@ def check():
         value1.pack(pady=15)
 
         value2 = Label(check_display_frame, text="Number of addition questions: " + str(data[rep][0]["ques_add"]),
-                       bg="#7694e3", font=("oxygen", 25))   # displays the number of addition
+                       bg="#7694e3", font=("oxygen", 25))  # displays the number of addition
         value2.place()
         value2.pack(pady=15)
 
         value3 = Label(check_display_frame, text="Number of subtraction questions: " + str(data[rep][0]["ques_sub"]),
-                       bg="#7694e3", font=("oxygen", 25))   # displays the number of subtraction
+                       bg="#7694e3", font=("oxygen", 25))  # displays the number of subtraction
         value3.place()
         value3.pack(pady=15)
 
         value4 = Label(check_display_frame, text="multiplication: " + str(data[rep][0]["ques_mul"]), bg="#7694e3",
-                       font=("oxygen", 25))     # displays the number of multiplication
+                       font=("oxygen", 25))  # displays the number of multiplication
         value4.place()
         value4.pack(pady=15)
 
         value5 = Label(check_display_frame, text="The total number of question : " + str(sum_rules), bg="#7694e3",
-                       font=("oxygen", 25))     # displays all the questions add up to
+                       font=("oxygen", 25))  # displays all the questions add up to
         value5.place()
         value5.pack(pady=15)
 
@@ -276,22 +296,22 @@ def modify():
                     font=("", 25, "bold"))  # displays the current value from the rules.json
     current.place(relx=0.3, rely=0.35)
 
-    if change_to == "range":
+    if change_to == "range":  # if user choose to change the range value
         label_ = Label(modify_display_frame, text="Value 1:", fg='white', bg='black')
-        label_.place(relx=0.21, rely=0.5)
+        label_.place(relx=0.21, rely=0.5) # minimum number or the first value 
 
         label_2 = Label(modify_display_frame, text="Value 2:", fg='white', bg='black')
-        label_2.place(relx=0.21, rely=0.6)
+        label_2.place(relx=0.21, rely=0.6)	# maximum number or the 2nd value 
 
         user_value = Entry(modify_display_frame, bg='white', fg='black', textvariable=var)
         user_value.config(width=42)
-        user_value.place(relx=0.31, rely=0.5)
+        user_value.place(relx=0.31, rely=0.5) # input for first value
 
         user_value2 = Entry(modify_display_frame, bg='white', fg='black', textvariable=var)
         user_value2.config(width=42)
-        user_value2.place(relx=0.31, rely=0.6)
+        user_value2.place(relx=0.31, rely=0.6) # input for 2nd value
 
-    else:
+    else:	# else it will display only one label and entry widget
         label_ = Label(modify_display_frame, text="Value:", fg='white', bg='black')
         label_.place(relx=0.21, rely=0.5)
 
@@ -301,34 +321,35 @@ def modify():
 
     def check_value_present():  # this function will check if the user has entered any value. if yes then it will replace the value with rules.json
         try:
-            if change_to == "range":    # if the user chosen to change range
-                if int(user_value.get() and user_value2.get()) == 0:    # if the first value and 2nd value is 0.
+            if change_to == "range":  # if the user chosen to change range
+                if int(user_value.get() and user_value2.get()) == 0:  # if the first value and 2nd value is 0.
                     error = Label(modify_display_frame, text="please enter the value", fg='black', bg='white')
-                    error.place(relx=0.37, rely=0.7)    # it will display to warn the user
+                    error.place(relx=0.37, rely=0.7)  # it will display to warn the user
                     modify_display.update()
                 else:
                     print("current value: ", data[rep][0][change_to])
 
-                    modify_into = change_to     # change the variable name
-                    value = str(user_value.get())       # it will convert the variable to string
-                    value2 = str(user_value2.get())     # it will convert the variable to string
-                    user_range = str(value+","+value2)  # this variable will replace the range rules from rules.json
-                    data[rep][0][modify_into] = user_range  # this will select the variable from the rules.json to be replaced
+                    modify_into = change_to  # change the variable name
+                    value = str(user_value.get())  # it will convert the variable to string
+                    value2 = str(user_value2.get())  # it will convert the variable to string
+                    user_range = str(value + "," + value2)  # this variable will replace the range rules from rules.json
+                    data[rep][0][
+                        modify_into] = user_range  # this will select the variable from the rules.json to be replaced
 
                     with open('rules.json', 'w') as fi:  # It will open the rules.json
-                        json.dump(data, fi, indent=2)   # this will replace the variable from the rules.json
+                        json.dump(data, fi, indent=2)  # this will replace the variable from the rules.json
                     modify_display.destroy()
                     change()
 
             else:
                 print("current value: ", data[rep][0][change_to])
 
-                modify_into = change_to     # change the variable name
+                modify_into = change_to  # change the variable name
                 value = int(user_value.get())
-                data[rep][0][modify_into] = value   # this will select the variable from the rules.json to be replaced
+                data[rep][0][modify_into] = value  # this will select the variable from the rules.json to be replaced
 
-                with open('rules.json', 'w') as fi:     # it will open the rules.json
-                    json.dump(data, fi, indent=2)   # this will replace the variable from the rules.json
+                with open('rules.json', 'w') as fi:  # it will open the rules.json
+                    json.dump(data, fi, indent=2)  # this will replace the variable from the rules.json
                 modify_display.destroy()
                 change()
 
@@ -338,7 +359,7 @@ def modify():
             error.place(relx=0.37, rely=0.67)
 
     change_value = Button(modify_display_frame, text='Change', padx=5, pady=5, width=5, command=check_value_present,
-                          fg="black", bg="white")   # it will call the function check_value_present.
+                          fg="black", bg="white")  # it will call the function check_value_present.
     change_value.configure(width=15, height=1, activebackground="#33B5E5", relief=FLAT)
     change_value.place(relx=0.4, rely=0.8)
     modify_display.mainloop()
@@ -346,7 +367,7 @@ def modify():
 
 def change():
     change_display = Tk()
-    change_display.title("change the rules for " + rep)     # rep is the difficulty global variable selected by the user
+    change_display.title("change the rules for " + rep)  # rep is the difficulty global variable selected by the user
 
     change_display_canvas = Canvas(change_display, width=720, height=440, bg="#000077")
     change_display_canvas.pack()
@@ -355,27 +376,36 @@ def change():
     change_display_frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
 
     select = Label(change_display_frame, text='Change the rules for: ' + rep, bg="#7694e3", font="calibri 18")
-    select.place(relx=0.25, rely=0.1)   # it will display the rules from the difficulty you want to change
+    select.place(relx=0.25, rely=0.1)  # it will display the rules from the difficulty you want to change
 
     var = IntVar()
     change_range = Radiobutton(change_display_frame, text='Range of Values - Current: ' + str(data[rep][0]["range"]),
-                               bg="#a9c5e4", font="calibri 16", value=1, variable=var)    # Button with the current value in the option
+                               bg="#a9c5e4", font="calibri 16", value=1,
+                               variable=var)  # Button with the current value in the option
     change_range.place(relx=0.25, rely=0.2)
 
-    change_add = Radiobutton(change_display_frame,  text='Number of addition question - Current: ' + str(data[rep][0]["ques_add"]),
-                             bg="#a9c5e4", font="calibri 16",  value=2, variable=var)     # Button with the current value in the option
+    change_add = Radiobutton(change_display_frame,
+                             text='Number of addition question - Current: ' + str(data[rep][0]["ques_add"]),
+                             bg="#a9c5e4", font="calibri 16", value=2,
+                             variable=var)  # Button with the current value in the option
     change_add.place(relx=0.25, rely=0.3)
 
-    change_sub = Radiobutton(change_display_frame, text='Number of subtraction question - Current: ' + str(data[rep][0]["ques_sub"]),
-                             bg="#a9c5e4", font="calibri 16", value=3, variable=var)     # Button with the current value in the option
+    change_sub = Radiobutton(change_display_frame,
+                             text='Number of subtraction question - Current: ' + str(data[rep][0]["ques_sub"]),
+                             bg="#a9c5e4", font="calibri 16", value=3,
+                             variable=var)  # Button with the current value in the option
     change_sub.place(relx=0.25, rely=0.4)
 
-    change_mul = Radiobutton(change_display_frame, text='Number of multiplication question - Current: ' + str(data[rep][0]["ques_mul"]),
-                             bg="#a9c5e4", font="calibri 16", value=4, variable=var)    # Button with the current value in the option
+    change_mul = Radiobutton(change_display_frame,
+                             text='Number of multiplication question - Current: ' + str(data[rep][0]["ques_mul"]),
+                             bg="#a9c5e4", font="calibri 16", value=4,
+                             variable=var)  # Button with the current value in the option
     change_mul.place(relx=0.25, rely=0.5)
 
-    change_attempt = Radiobutton(change_display_frame, text='Number of attempts per question - Current: ' + str(data[rep][0]["attempt"]),
-                                 bg="#a9c5e4", font="calibri 16", value=5, variable=var)    # Button with the current value in the option
+    change_attempt = Radiobutton(change_display_frame,
+                                 text='Number of attempts per question - Current: ' + str(data[rep][0]["attempt"]),
+                                 bg="#a9c5e4", font="calibri 16", value=5,
+                                 variable=var)  # Button with the current value in the option
     change_attempt.place(relx=0.25, rely=0.6)
 
     to_quit = Radiobutton(change_display_frame, text='Quit', bg="#a9c5e4", font="calibri 16", value=6, variable=var)
@@ -436,7 +466,7 @@ def replace():
     replace_display_frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
 
     select = Label(replace_display_frame, text='What difficulties rules you want to change?', bg="#7694e3",
-                   font="calibri 18")   # Heading
+                   font="calibri 18")  # Heading
     select.place(relx=0.25, rely=0.3)
 
     var = IntVar()
@@ -493,43 +523,43 @@ def menu():
     ask_frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
 
     wel = Label(ask_canvas, text=" P R O G R A M  F O R  T E A C H E R' S  O N L Y  ", fg="white", bg="#000077")
-    wel.config(font=('oxygen', 20, "bold"))    # Title
+    wel.config(font=('oxygen', 20, "bold"))  # Title
     wel.place(relx=0.05, rely=0.01)
 
     select = Label(ask_frame, text='please Select the below option', bg="#7694e3", font="calibri 18")
-    select.place(relx=0.25, rely=0.3)   # Heading
+    select.place(relx=0.25, rely=0.3)  # Heading
 
-    var = IntVar()
+    var = IntVar()	# integer
     find_rules = Radiobutton(ask_frame, text='View the rules', bg="#a9c5e4", font="calibri 16", value=1, variable=var)
-    find_rules.place(relx=0.25, rely=0.4)
+    find_rules.place(relx=0.25, rely=0.4)	# clickable option
 
     change_rules = Radiobutton(ask_frame, text='Change the rules', bg="#a9c5e4", font="calibri 16", value=2,
                                variable=var)
-    change_rules.place(relx=0.25, rely=0.5)
+    change_rules.place(relx=0.25, rely=0.5)	# clickable option
 
     quit_rules = Radiobutton(ask_frame, text='View result of a student', bg="#a9c5e4", font="calibri 16", value=3,
                              variable=var)
-    quit_rules.place(relx=0.25, rely=0.6)
+    quit_rules.place(relx=0.25, rely=0.6)	# clickable option
 
     quit_rules = Radiobutton(ask_frame, text='Quit', bg="#a9c5e4", font="calibri 16", value=4, variable=var)
-    quit_rules.place(relx=0.25, rely=0.7)
+    quit_rules.place(relx=0.25, rely=0.7)	# clickable option
 
     def navigate():
 
         x = var.get()
         print(x)
         if x == 1:
-            ask_display.destroy()
+            ask_display.destroy()	# destroy this window
             find()
         elif x == 2:
-            ask_display.destroy()
+            ask_display.destroy()	# destroy this window
             replace()
 
         elif x == 3:
-            ask_display.destroy()
+            ask_display.destroy()	# destroy this window
             result()
         elif x == 4:
-            ask_display.destroy()
+            ask_display.destroy()	# destroy this window
 
         else:
             pass
@@ -555,7 +585,7 @@ def end_menu():  ## 2nd menu if the user wants to use the program again
     wel.place(relx=0.05, rely=0.02)
 
     select = Label(ask_again_frame, text='Do you want to use the program again ?', bg="#7694e3", font="calibri 18")
-    select.place(relx=0.25, rely=0.3)   # heading
+    select.place(relx=0.25, rely=0.3)  # heading
 
     var = IntVar()
     find_rules = Radiobutton(ask_again_frame, text='YES', bg="#a9c5e4", font="calibri 16", value=1,
