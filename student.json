@@ -304,6 +304,11 @@
       "name": "yolo1",
       "difficulty": "standard",
       "score": 9
+    },
+    {
+      "name": "hello1",
+      "difficulty": "easy",
+      "score": 0
     }
   ]
 }

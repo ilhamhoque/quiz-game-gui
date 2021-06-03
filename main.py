@@ -177,22 +177,20 @@ def working():
                 a.update()
 
                 score_var = score_var + 1  # + 1 is added to the score variable
-                time.sleep(
-                    1.2)  # This delays 1.2 second. otherwise user won't see if the user got the answer correct or not.
+                attempt_var = attempt_var * 0
+                time.sleep(1.2)  # This delays 1.2 second. otherwise user won't see if the user got the answer correct or not.
                 a.destroy()  # it destroy the addition display
                 check()  # it calls checks to see if the number of addition question is equal to the rules
 
             else:  # if the user doesn't get the answer
                 print("you didn't got it")
-                print("the answer was", ans)
 
                 attempt_var = attempt_var + 1  # adds + 1 to the attempts variable
 
                 print("attempt_var", attempt_var)
 
-                didnt_got_it = Label(frame, text="you didn't got it.\nThe answer was " + str(ans),
-                                     bg="#7694e3")  # this widget displays the correct answer
-                didnt_got_it.place(relx=0.25, rely=0.6)
+                didnt_got_it = Label(frame, text="you didn't got it", bg="#7694e3")  # this widget displays the correct answer
+                didnt_got_it.place(relx=0.25, rely=0.65)
 
                 attempt_it = Label(frame, text="attempt " + str(attempt_var), bg="#7694e3")
                 attempt_it.place(relx=0.25, rely=0.75)  # this widget displays the number of attempts
@@ -200,20 +198,22 @@ def working():
                 time.sleep(1.2)  # This delays 1.2 second. otherwise user won't see the Label widgets above.
 
                 if int(attempt_var) == attempt_file:  # if the number of attempts is equal to the attempts from rules.json
-                    print("your out of attempt_var")
+
+                    didnt_got_it = Label(frame, text="you didn't got it.\nThe answer was " + str(ans),
+                                         bg="#7694e3")  # this widget displays the correct answer
+                    didnt_got_it.place(relx=0.25, rely=0.6)
 
                     out_attempt = Label(frame, text="You are out of attempt", bg="#7694e3")
                     out_attempt.place(relx=0.25,
                                       rely=0.4)  # displays to show the user that the user is out of attempts.
 
+                    attempt_var = attempt_var * 0
                     a.update()
                     time.sleep(1.2)  # This delays 1.2 second. otherwise user won't see the out_attempt widget.
                     a.destroy()
-                    score_result()  # calls the score_result functions to display the score and then calls another functions from score_result
+                    check()  # calls the score_result functions to display the score and then calls another functions from score_result
                 else:  # if the attempt variable does not meet the attempts from the rules.
-                    a.update()
-                    a.destroy()
-                    check()
+                    pass
 
         except ValueError:  # if the users input is not integer
             messagebox.showerror("Invalid input", "please only enter an integer")
